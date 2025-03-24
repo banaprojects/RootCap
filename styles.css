@@ -206,7 +206,7 @@ header::before {
   /* background-position: 20%; */
   background-attachment: fixed;
   z-index: -1;
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 header.scrolled {
@@ -885,7 +885,7 @@ footer {
 
 .typewriter {
   display: inline-block;
-  border-right: 4px solid #fff;
+  border-right: 4px solid rgba(139, 117, 81, 0.2);
   white-space: nowrap;
   overflow: hidden;
   animation: blinkCursor 0.7s step-end infinite;
@@ -904,7 +904,8 @@ h1, span {
   font-size: 7rem;
   opacity: 1;
   font-weight: 600;
-  color: #fff;
+  color: rgba(2, 19, 2, 0.9);
+  
   letter-spacing: -0.5px;
   animation: fadeInDown 1s ease-out;
 }
