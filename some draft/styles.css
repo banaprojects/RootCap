@@ -1,0 +1,5 @@
+.svg {
+    /* Ensure smooth rendering */
+    stroke-linejoin: round; /* Smooths corners */
+    stroke-linecap: round; 
+  }

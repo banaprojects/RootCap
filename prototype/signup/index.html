@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RootCap Investment - Sign Up</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="signup-container">
+      <div class="logo">
+        <h1>RootCap Investment</h1>
+      </div>
+      <form>
+        <div class="form-group">
+          <select id="userType" required>
+            <option value="" disabled selected></option>
+            <option value="farmer">Farmer</option>
+            <option value="investor">Investor</option>
+          </select>
+          <label for="userType">User Type</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="tel"
+            id="phone"
+            placeholder=" "
+            pattern="[0-9]{10}"
+            required
+          />
+          <label for="phone">Phone Number</label>
+        </div>
+        <div class="form-group">
+          <input type="date" id="dob" placeholder=" " required />
+          <label for="dob">Date of Birth</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder=" " required />
+          <label for="password">Password</label>
+        </div>
+        <button type="submit" class="signup-btn">Sign Up</button>
+      </form>
+      <div class="footer-text">
+        <p>Already have an account? <a href="#">Login</a></p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

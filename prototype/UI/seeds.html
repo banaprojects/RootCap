@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RootCap Investment - New Seeds Opt-In</title>
+    <style>
+      /* [Original CSS unchanged, copied from your fourth document] */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background: #f5f5f5;
+        min-height: 100vh;
+      }
+      .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .navbar {
+        background: #27ae60;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        animation: slideDown 0.5s ease-out;
+      }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      .logo h1 {
+        color: white;
+        font-size: 1.8em;
+        font-weight: 600;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      .nav-links li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+      .nav-links li a:hover,
+      .nav-links li a.active {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .content {
+        flex: 1;
+        padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .intro-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .intro-section h2 {
+        color: #27ae60;
+        margin-bottom: 20px;
+      }
+      .intro-section p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .seeds-list {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 3;
+        min-height: 400px;
+      }
+      .seeds-list h2 {
+        color: #27ae60;
+        margin-bottom: 20px;
+      }
+      .seeds-list p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .opt-in-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .opt-in-section h2 {
+        color: #27ae60;
+        margin-bottom: 20px;
+      }
+      .opt-in-section p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .action-buttons button {
+        padding: 12px 25px;
+        background: #27ae60;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .action-buttons button:hover {
+        background: #219653;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <nav class="navbar">
+        <div class="logo">
+          <h1>RootCap Investment</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Find Investors</a></li>
+          <li><a href="#" class="active">New Seeds Opt-In</a></li>
+          <li><a href="#">Notifications</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </nav>
+      <main class="content">
+        <section class="intro-section">
+          <h2>New Seeds Program</h2>
+          <p>
+            Join our New Seeds Program to access cutting-edge seed varieties.
+            Boost yields, improve sustainability, and attract eco-conscious
+            investors. Opt in below to get started!
+          </p>
+        </section>
+        <section class="seeds-list">
+          <h2>Available Seed Options</h2>
+          <div style="margin-bottom: 15px">
+            <label>Sort by: </label>
+            <select style="padding: 5px; border-radius: 5px">
+              <option>Yield</option>
+              <option>Investor Appeal</option>
+              <option>Name</option>
+            </select>
+          </div>
+          <div style="max-height: 350px; overflow-y: auto">
+            <div style="border-bottom: 1px solid #eee; padding: 15px">
+              <strong>DroughtGuard Corn</strong><br />
+              Expected Yield: +15% vs. standard<br />
+              Conditions: Dry climates, low water<br />
+              Investor Appeal: High (sustainability focus)<br />
+              <label style="margin-top: 10px"
+                ><input type="checkbox" /> Opt-In</label
+              >
+            </div>
+            <div style="border-bottom: 1px solid #eee; padding: 15px">
+              <strong>FastGrow Soybeans</strong><br />
+              Expected Yield: +10% vs. standard<br />
+              Conditions: Temperate, fertile soil<br />
+              Investor Appeal: Moderate<br />
+              <label style="margin-top: 10px"
+                ><input type="checkbox" /> Opt-In</label
+              >
+            </div>
+            <!-- Add more entries as needed -->
+          </div>
+        </section>
+        <section class="opt-in-section">
+          <div>
+            <h2>Opt-In Actions</h2>
+            <p>
+              Select your seeds above, then confirm to receive them in your next
+              shipment. You can save your choices without committing.
+            </p>
+          </div>
+          <div class="action-buttons">
+            <button>Confirm Opt-In</button>
+            <button>Save Selection</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      const navLinks = document.querySelectorAll(".nav-links a");
+      navLinks.forEach((link) => {
+        link.addEventListener("mouseover", () => {
+          link.style.transform = "scale(1.05)";
+        });
+        link.addEventListener("mouseout", () => {
+          link.style.transform = "scale(1)";
+        });
+      });
+      const buttons = document.querySelectorAll(".action-buttons button");
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert("This is a prototype - functionality not implemented");
+        });
+      });
+    </script>
+  </body>
+</html>

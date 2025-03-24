@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RootCap Investment</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <nav class="navbar">
+        <div class="logo">
+          <h1>RootCap Investment</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a data-page="dashboard" class="active">Home</a></li>
+          <li><a data-page="find-farms">Find Farms</a></li>
+          <li><a data-page="portfolio">Portfolio</a></li>
+          <li><a data-page="notifications">Notifications</a></li>
+          <li>
+            <a data-page="account">Account</a>
+            <div class="dropdown">
+              <a href="#" data-action="settings">Settings</a>
+              <a href="#" data-action="update-profile">Update Profile</a>
+              <a href="#" data-action="metrics">Metrics</a>
+              <a href="#" data-action="logout">Logout</a>
+            </div>
+          </li>
+          <li>
+            <button class="view-as-btn" id="viewAsFarmer">
+              View As Farmer
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Dashboard Page -->
+      <main id="dashboard" class="content active">
+        <section class="welcome-card">
+          <h2>Welcome, John Doe</h2>
+          <p>
+            Your investments are growing! Review your portfolio or explore new
+            farm opportunities below.
+          </p>
+          <p class="subtext">Investor Since: 2022 | Total Invested: $150K</p>
+        </section>
+        <section class="stats-grid">
+          <div class="stat-card">
+            <h3>Active Investments</h3>
+            <p>
+              Invested: $100K<br />Farms: 4<br />Avg. ROI: 8.5%<br /><a href="#"
+                >View Portfolio</a
+              >
+            </p>
+          </div>
+          <div class="stat-card">
+            <h3>New Opportunities</h3>
+            <p>
+              Farms Available: 12<br />Funding Needed: $300K<br />Top Interest:
+              Organic<br /><a href="#">Explore Now</a>
+            </p>
+          </div>
+          <div class="stat-card">
+            <h3>Recent Actions</h3>
+            <p>
+              Mar 23: Invested $20K in ‘Green Acres’<br />Mar 21: Reviewed
+              ‘Sunny Fields’<br /><a href="#">See All</a>
+            </p>
+          </div>
+        </section>
+        <section class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="action-buttons">
+            <button>Find Farms</button>
+            <button>Check Returns</button>
+            <button>Message Farmers</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Find Farms Page -->
+      <main id="find-farms" class="content">
+        <section class="search-section">
+          <h2>Find Farms</h2>
+          <input
+            type="text"
+            placeholder="Search by name, location, or type (e.g., sustainable)"
+          />
+          <div class="filter-group">
+            <select>
+              <option>Funding Range</option>
+              <option>$5K-$20K</option>
+              <option>$20K-$50K</option>
+              <option>$50K+</option>
+            </select>
+            <select>
+              <option>Location</option>
+              <option>All</option>
+              <option>North America</option>
+              <option>Europe</option>
+              <option>Asia</option>
+            </select>
+            <div class="checkbox-group">
+              <label><input type="checkbox" /> Organic</label>
+              <label><input type="checkbox" /> Livestock</label>
+              <label><input type="checkbox" /> Tech-Driven</label>
+            </div>
+            <button>Apply Filters</button>
+          </div>
+        </section>
+        <section class="farms-list">
+          <h2>Farm Opportunities</h2>
+          <div class="list-container">
+            <div class="farm-item">
+              <strong>Green Acres</strong><br />
+              Funding: $25K<br />
+              Type: Organic Crops<br />
+              Location: Iowa, USA<br />
+              <button>View Details</button>
+            </div>
+            <div class="farm-item">
+              <strong>Sunny Fields</strong><br />
+              Funding: $40K<br />
+              Type: Solar Farming<br />
+              Location: California, USA<br />
+              <button>View Details</button>
+            </div>
+          </div>
+          <div class="pagination">
+            Page 1 of 4 <button>Prev</button> <button>Next</button>
+          </div>
+        </section>
+        <section class="action-section">
+          <div>
+            <h2>Actions</h2>
+            <p>Select a farm to invest or connect with the farmer.</p>
+          </div>
+          <div class="action-buttons">
+            <button>Invest Now</button>
+            <button>Save Farm</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Portfolio Page -->
+      <main id="portfolio" class="content">
+        <section class="portfolio-overview">
+          <h2>Portfolio Summary</h2>
+          <p>Total Invested: $100K | Farms: 4 | Avg. ROI: 8.5%</p>
+          <p class="subtext">Next Payout: $6K (Jul 2025)</p>
+        </section>
+        <section class="portfolio-list">
+          <h2>Your Investments</h2>
+          <div class="list-container">
+            <div class="investment-item">
+              <strong>Green Acres</strong><br />
+              Invested: $20K (Mar 2025)<br />
+              ROI: 9.2%<br />
+              Status: Active<br />
+              <button>View Report</button>
+            </div>
+            <div class="investment-item">
+              <strong>Blue Hills</strong><br />
+              Invested: $35K (Jan 2025)<br />
+              ROI: 7.8%<br />
+              Status: Active<br />
+              <button>View Report</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Notifications Page -->
+      <main id="notifications" class="content">
+        <section class="notifications-header">
+          <h2>Notifications</h2>
+          <!-- <p>You have 4 unread messages.</p> -->
+          <div class="filter-group">
+            <!-- <select>
+              <option>All</option>
+              <option>Unread</option>
+              <option>Farm Updates</option>
+              <option>Payments</option>
+            </select> -->
+            <input type="text" placeholder="Search notifications" />
+            <!-- <label><input type="checkbox" /> Unread Only</label> -->
+          </div>
+        </section>
+        <section class="notifications-list">
+          <h2>Recent Updates</h2>
+          <div class="list-container">
+            <p class="unread">
+              <span class="dot">•</span> Mar 23, 2025: ‘Green Acres’ updated
+              yield data.
+            </p>
+            <p class="unread">
+              <span class="dot">•</span> Mar 22, 2025: $20K investment
+              confirmed.
+            </p>
+            <p>Mar 20, 2025: ‘Sunny Fields’ sent a funding request.</p>
+            <p>Mar 19, 2025: Payment received from ‘Blue Hills’.</p>
+          </div>
+        </section>
+        <!-- <section class="notifications-actions">
+          <div>
+            <h2>Manage</h2>
+            <p>Organize your notifications for clarity.</p>
+          </div>
+          <div class="action-buttons">
+            <button>Mark All Read</button>
+            <button>Clear All</button>
+          </div>
+        </section> -->
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2025 RootCap Investment. All rights reserved.</p>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RootCap Investment - Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background: #f5f5f5;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .login-container {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .logo h1 {
+        color: #27ae60;
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      .form-content {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        padding: 0 40px;
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      .form-content.active {
+        position: relative;
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .form-content.exit {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      .form-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+      }
+      .form-group label {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      .form-group input:focus + label,
+      .form-group input:not(:placeholder-shown) + label {
+        top: -10px;
+        font-size: 12px;
+        color: #27ae60;
+        background: white;
+        padding: 0 5px;
+      }
+      .login-btn,
+      .signup-btn {
+        padding: 12px 25px;
+        background: #27ae60;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+      .login-btn:hover,
+      .signup-btn:hover {
+        background: #219653;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+      }
+      .footer-text {
+        margin-top: 20px;
+        color: #666;
+        font-size: 14px;
+      }
+      .footer-text a {
+        color: #27ae60;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .footer-text a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="logo">
+        <h1>RootCap Investment</h1>
+      </div>
+      <div id="login" class="form-content active">
+        <form id="loginForm">
+          <div class="form-group">
+            <input type="text" id="farmerID" placeholder=" " required />
+            <label for="farmerID">Account ID</label>
+          </div>
+          <div class="form-group">
+            <input type="password" id="password" placeholder=" " required />
+            <label for="password">Password</label>
+          </div>
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+        <div class="footer-text">
+          <p>Forgot your password? <a href="#">Reset it</a></p>
+          <p>Don't have an account? <a id="showSignup">Sign Up</a></p>
+        </div>
+      </div>
+      <div id="signup" class="form-content">
+        <form id="signupForm">
+          <div class="form-group">
+            <input type="text" id="signupFarmerID" placeholder=" " required />
+            <label for="signupFarmerID">Account ID</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder=" " required />
+            <label for="email">Email</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder=" "
+              required
+            />
+            <label for="signupPassword">Password</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder=" "
+              required
+            />
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <div class="footer-text">
+          <p>Already have an account? <a id="showLogin">Login</a></p>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const loginContent = document.getElementById("login");
+        const signupContent = document.getElementById("signup");
+        const showSignupLink = document.getElementById("showSignup");
+        const showLoginLink = document.getElementById("showLogin");
+        const loginForm = document.getElementById("loginForm");
+        const signupForm = document.getElementById("signupForm");
+
+        function showView(viewId) {
+          const contents = [loginContent, signupContent];
+          const targetContent = document.getElementById(viewId);
+          const currentContent = contents.find((content) =>
+            content.classList.contains("active")
+          );
+
+          if (currentContent === targetContent) return;
+
+          if (currentContent) {
+            currentContent.classList.add("exit");
+            setTimeout(() => {
+              currentContent.classList.remove("active", "exit");
+            }, 500);
+          }
+
+          setTimeout(
+            () => {
+              targetContent.classList.add("active");
+            },
+            currentContent ? 250 : 0
+          );
+        }
+
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const farmerID = document.getElementById("farmerID").value;
+          const password = document.getElementById("password").value;
+          if (farmerID && password) {
+            alert("Login successful! Redirecting...");
+            window.location.href = "./UI/farmer-side/index.html";
+          } else {
+            alert("Please fill in all fields.");
+          }
+        });
+
+        signupForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const farmerID = document.getElementById("signupFarmerID").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("signupPassword").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+          if (farmerID && email && password && confirmPassword) {
+            if (password === confirmPassword) {
+              alert("Sign up successful! Redirecting to login...");
+              showView("login");
+            } else {
+              alert("Passwords do not match.");
+            }
+          } else {
+            alert("Please fill in all fields.");
+          }
+        });
+
+        showSignupLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          showView("signup");
+        });
+
+        showLoginLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          showView("login");
+        });
+      });
+    </script>
+  </body>
+</html>

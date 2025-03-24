@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RootCap Investment</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background: #f5f5f5;
+        min-height: 100vh;
+      }
+      .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .navbar {
+        background: #27ae60;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        animation: slideDown 0.5s ease-out;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      .logo h1 {
+        color: white;
+        font-size: 1.8em;
+        font-weight: 600;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        position: relative;
+        align-items: center;
+      }
+      .nav-links li {
+        position: relative;
+      }
+      .nav-links li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .nav-links li a:hover,
+      .nav-links li a.active {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .content {
+        flex: 1;
+        padding: 30px;
+        max-width: 1200px;
+        margin: 80px auto 0;
+        width: 100%;
+        display: none;
+      }
+      .content.active {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      /* Dropdown Styles */
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        min-width: 150px;
+        z-index: 1000;
+      }
+      .dropdown a {
+        display: block;
+        color: #666;
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .dropdown a:hover {
+        background: #f5f5f5;
+        color: #27ae60;
+      }
+      .nav-links li:hover .dropdown {
+        display: block;
+      }
+
+      /* View As Button */
+      .view-as-btn {
+        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .view-as-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+
+      /* Find Investors Styles */
+      .search-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+      }
+      .investors-list {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 3;
+        min-height: 400px;
+      }
+      .action-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* Dashboard Styles */
+      .welcome-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        animation: fadeIn 0.8s ease-out;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+      }
+      .quick-actions {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      /* Notifications Styles */
+      .notifications-header {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 150px;
+      }
+      .notifications-list {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 4;
+        min-height: 500px;
+      }
+      .notifications-actions {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* New Seeds Styles */
+      .intro-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+      }
+      .seeds-list {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 3;
+        min-height: 400px;
+      }
+      .opt-in-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease-out;
+        flex: 1;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* Shared Styles */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      h2 {
+        color: #27ae60;
+        margin-bottom: 20px;
+      }
+      h3 {
+        color: #27ae60;
+        margin-bottom: 10px;
+      }
+      p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .action-buttons button {
+        padding: 12px 25px;
+        background: #27ae60;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .action-buttons button:hover {
+        background: #219653;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+      }
+      .quick-actions .action-buttons button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <nav class="navbar">
+        <div class="logo">
+          <h1>RootCap Investment</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a data-page="dashboard" class="active">Home</a></li>
+          <li><a data-page="find-investors">Find Investors</a></li>
+          <li><a data-page="new-seeds">New Seeds Opt-In</a></li>
+          <li><a data-page="notifications">Notifications</a></li>
+          <li>
+            <a data-page="account">Account</a>
+            <div class="dropdown">
+              <a href="#" data-action="settings">Settings</a>
+              <a href="#" data-action="update-profile">Update Profile</a>
+              <a href="#" data-action="metrics">Metrics</a>
+              <a href="#" data-action="logout">Logout</a>
+            </div>
+          </li>
+          <li>
+            <button class="view-as-btn" id="viewAsInvestor">
+              View As Investor
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Dashboard Page -->
+      <main id="dashboard" class="content active">
+        <section class="welcome-card">
+          <h2>Welcome, Jane Farmer</h2>
+          <p>
+            Good to see you! You have 2 new investor inquiries and $15K in
+            pending funding. Check your stats below or take action now.
+          </p>
+          <p style="font-size: 14px; color: #888">
+            Farm: Green Acres | Location: Iowa, USA | Since: 2023
+          </p>
+        </section>
+        <section class="stats-grid">
+          <div class="stat-card">
+            <h3>Farm Status</h3>
+            <p>
+              Active Projects: 3 (Corn, Soybeans, Solar Panels)<br />Land Area:
+              150 acres<br />Health: 92% (based on latest report)<br /><a
+                href="#"
+                >View Full Report</a
+              >
+            </p>
+          </div>
+          <div class="stat-card">
+            <h3>Investment Progress</h3>
+            <p>
+              Total Funding: $45K<br />Pending: $15K (2 offers)<br />Investors
+              Connected: 5<br /><progress value="60" max="100">60%</progress> to
+              $75K goal
+            </p>
+          </div>
+          <div class="stat-card">
+            <h3>Recent Activity</h3>
+            <p>
+              Mar 20, 2025: Investor ‘GreenFuture’ sent a $10K proposal.<br />Mar
+              18, 2025: Updated farm profile.<br /><a href="#"
+                >See All Activity</a
+              >
+            </p>
+          </div>
+        </section>
+        <section class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="action-buttons">
+            <button>Update Farm Profile</button>
+            <button>Post Funding Request</button>
+            <button>Check Messages</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Find Investors Page -->
+      <main id="find-investors" class="content">
+        <section class="search-section">
+          <h2>Search Investors</h2>
+          <input
+            type="text"
+            placeholder="Search by name, location, or interest (e.g., organic farming)"
+            style="
+              width: 100%;
+              padding: 10px;
+              margin-bottom: 15px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            "
+          />
+          <div style="display: flex; gap: 15px; flex-wrap: wrap">
+            <select style="padding: 10px; border-radius: 5px">
+              <option>Investment Range</option>
+              <option>$1K-$10K</option>
+              <option>$10K-$50K</option>
+              <option>$50K+</option>
+            </select>
+            <select style="padding: 10px; border-radius: 5px">
+              <option>Location</option>
+              <option>All</option>
+              <option>North America</option>
+              <option>Europe</option>
+              <option>Asia</option>
+            </select>
+            <div>
+              <label><input type="checkbox" /> Sustainable Farming</label>
+              <label><input type="checkbox" /> Livestock</label>
+              <label><input type="checkbox" /> Tech Innovation</label>
+            </div>
+            <button
+              style="
+                padding: 10px 20px;
+                background: #27ae60;
+                border: none;
+                border-radius: 5px;
+                color: white;
+              "
+            >
+              Apply Filters
+            </button>
+          </div>
+        </section>
+        <section class="investors-list">
+          <h2>Available Investors</h2>
+          <div style="max-height: 350px; overflow-y: auto">
+            <div style="border-bottom: 1px solid #eee; padding: 15px">
+              <strong>John Doe Ventures</strong><br />
+              Investment Range: $20K - $50K<br />
+              Interests: Organic Crops, Irrigation Tech<br />
+              Location: California, USA<br />
+              <button style="margin-top: 10px; padding: 8px 15px">
+                View Profile
+              </button>
+            </div>
+            <div style="border-bottom: 1px solid #eee; padding: 15px">
+              <strong>GreenFuture Fund</strong><br />
+              Investment Range: $10K - $100K<br />
+              Interests: Livestock, Sustainable Practices<br />
+              Location: Ontario, Canada<br />
+              <button style="margin-top: 10px; padding: 8px 15px">
+                View Profile
+              </button>
+            </div>
+          </div>
+          <div style="margin-top: 15px">
+            Page 1 of 3 <button>Prev</button> <button>Next</button>
+          </div>
+        </section>
+        <section class="action-section">
+          <div>
+            <h2>Actions</h2>
+            <p>
+              Select an investor from the list to contact them directly or save
+              your search criteria for later.
+            </p>
+          </div>
+          <div class="action-buttons">
+            <button>Contact Selected</button>
+            <button>Save Search</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Notifications Page -->
+      <main id="notifications" class="content">
+        <section class="notifications-header">
+          <h2>Notifications</h2>
+          <p>You have 5 unread notifications.</p>
+          <div style="display: flex; gap: 15px; margin-top: 10px">
+            <select style="padding: 10px; border-radius: 5px">
+              <option>All</option>
+              <option>Unread</option>
+              <option>Investor</option>
+              <option>System</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Search notifications"
+              style="padding: 10px; border: 1px solid #ccc; border-radius: 5px"
+            />
+            <label><input type="checkbox" /> Show only unread</label>
+          </div>
+        </section>
+        <section class="notifications-list">
+          <h2>Recent Notifications</h2>
+          <div style="max-height: 450px; overflow-y: auto">
+            <p
+              style="
+                font-weight: bold;
+                padding: 10px;
+                border-bottom: 1px solid #eee;
+              "
+            >
+              <span style="color: #27ae60">•</span> Mar 23, 2025, 10:30 AM:
+              Investor ‘John Doe Ventures’ viewed your profile.
+            </p>
+            <p
+              style="
+                font-weight: bold;
+                padding: 10px;
+                border-bottom: 1px solid #eee;
+              "
+            >
+              <span style="color: #27ae60">•</span> Mar 22, 2025, 3:15 PM:
+              Funding offer of $10K received from ‘GreenFuture Fund’.
+            </p>
+            <p style="padding: 10px; border-bottom: 1px solid #eee">
+              Mar 20, 2025, 9:00 AM: System: Your farm report is ready.
+            </p>
+            <p style="padding: 10px; border-bottom: 1px solid #eee">
+              Mar 19, 2025, 11:45 AM: Investor ‘AgriCapital’ sent a message.
+            </p>
+          </div>
+        </section>
+        <section class="notifications-actions">
+          <div>
+            <h2>Manage Notifications</h2>
+            <p>
+              Keep your inbox tidy by marking notifications as read or clearing
+              old ones.
+            </p>
+          </div>
+          <div class="action-buttons">
+            <button>Mark All Read</button>
+            <button>Clear All</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- New Seeds Opt-In Page -->
+      <main id="new-seeds" class="content">
+        <section class="intro-section">
+          <h2>New Seeds Program</h2>
+          <p>
+            Join our New Seeds Program to access cutting-edge seed varieties.
+            Boost yields, improve sustainability, and attract eco-conscious
+            investors. Opt in below to get started!
+          </p>
+        </section>
+        <section class="seeds-list">
+          <h2>Available Seed Options</h2>
+          <div style="margin-bottom: 15px">
+            <label>Sort by: </label>
+            <select style="padding: 5px; border-radius: 5px">
+              <option>Yield</option>
+              <option>Investor Appeal</option>
+              <option>Name</option>
+            </select>
+          </div>
+          <div style="max-height: 350px; overflow-y: auto">
+            <div style="border-bottom: 1px solid #eee; padding: 15px">
+              <strong>DroughtGuard Corn</strong><br />
+              Expected Yield: +15% vs. standard<br />
+              Conditions: Dry climates, low water<br />
+              Investor Appeal: High (sustainability focus)<br />
+              <label style="margin-top: 10px"
+                ><input type="checkbox" /> Opt-In</label
+              >
+            </div>
+            <div style="border-bottom: 1px solid #eee; padding: 15px">
+              <strong>FastGrow Soybeans</strong><br />
+              Expected Yield: +10% vs. standard<br />
+              Conditions: Temperate, fertile soil<br />
+              Investor Appeal: Moderate<br />
+              <label style="margin-top: 10px"
+                ><input type="checkbox" /> Opt-In</label
+              >
+            </div>
+          </div>
+        </section>
+        <section class="opt-in-section">
+          <div>
+            <h2>Opt-In Actions</h2>
+            <p>
+              Select your seeds above, then confirm to receive them in your next
+              shipment. You can save your choices without committing.
+            </p>
+          </div>
+          <div class="action-buttons">
+            <button>Confirm Opt-In</button>
+            <button>Save Selection</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // Navigation Logic
+      const navLinks = document.querySelectorAll(
+        ".nav-links a:not(.dropdown a)"
+      );
+      const dropdownLinks = document.querySelectorAll(".dropdown a");
+      const pages = document.querySelectorAll(".content");
+      const viewAsInvestorBtn = document.getElementById("viewAsInvestor");
+
+      function showPage(pageId) {
+        pages.forEach((page) => page.classList.remove("active"));
+        document.getElementById(pageId).classList.add("active");
+
+        navLinks.forEach((link) => link.classList.remove("active"));
+        document
+          .querySelector(`[data-page="${pageId}"]`)
+          .classList.add("active");
+
+        const title = `RootCap Investment - ${pageId
+          .replace("-", " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase())}`;
+        history.pushState({ page: pageId }, title, `/${pageId}`);
+        document.title = title;
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const pageId = link.getAttribute("data-page");
+          if (pageId !== "account") {
+            showPage(pageId);
+          }
+        });
+        link.addEventListener("mouseover", () => {
+          link.style.transform = "scale(1.05)";
+        });
+        link.addEventListener("mouseout", () => {
+          link.style.transform = "scale(1)";
+        });
+      });
+
+      dropdownLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const action = link.getAttribute("data-action");
+          switch (action) {
+            case "settings":
+              alert("Settings page - functionality not implemented");
+              break;
+            case "update-profile":
+              alert("Update Profile page - functionality not implemented");
+              break;
+            case "metrics":
+              alert("Metrics page - functionality not implemented");
+              break;
+            case "logout":
+              alert("Logging out - redirecting to login");
+              window.location.href = "login.html";
+              break;
+          }
+        });
+      });
+
+      viewAsInvestorBtn.addEventListener("click", () => {
+        window.location.href = "investor.html";
+      });
+
+      window.addEventListener("popstate", (event) => {
+        if (event.state && event.state.page) {
+          showPage(event.state.page);
+        }
+      });
+
+      const buttons = document.querySelectorAll(".action-buttons button");
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert("This is a prototype - functionality not implemented");
+        });
+      });
+
+      showPage("dashboard");
+    </script>
+  </body>
+</html>

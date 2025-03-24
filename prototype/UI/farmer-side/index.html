@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RootCap Investment</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <nav class="navbar">
+        <div class="logo">
+          <h1>RootCap Investment</h1>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+          <span class="hamburger"></span>
+        </button>
+        <div class="sidebar">
+          <ul class="nav-links">
+            <li><a data-page="dashboard" class="active">Home</a></li>
+            <li><a data-page="find-investors">Find Investors</a></li>
+            <li><a data-page="new-seeds">New Seeds Opt-In</a></li>
+            <li><a data-page="notifications">Notifications</a></li>
+            <li>
+              <a data-page="account">Account</a>
+              <div class="dropdown">
+                <a href="#" data-action="settings" class="account-links"
+                  >Settings</a
+                >
+                <a href="#" data-action="update-profile" class="account-links"
+                  >Update Profile</a
+                >
+                <a href="#" data-action="metrics" class="account-links"
+                  >Metrics</a
+                >
+                <a href="#" data-action="logout" class="account-links"
+                  >Logout</a
+                >
+              </div>
+            </li>
+            <li>
+              <button class="view-as-btn" id="viewAsInvestor">
+                View As Investor
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Dashboard Page -->
+      <main id="dashboard" class="content active">
+        <section class="welcome-card">
+          <h2>Welcome, Jane Farmer</h2>
+          <p>
+            Good to see you! You have 2 new investor inquiries and $15K in
+            pending funding. Check your stats below or take action now.
+          </p>
+          <p style="font-size: 14px; color: #888">
+            Farm: Torit | Location: South Sudan | Since: 2021
+          </p>
+        </section>
+        <section class="stats-grid">
+          <div class="stat-card">
+            <h3>Farm Status</h3>
+            <p>
+              Active Projects: 3 <br />Land Area: 150 acres<br />Health: 92%
+              <br /><a href="#">View Full Report</a>
+            </p>
+          </div>
+          <div class="stat-card">
+            <h3>Investment Progress</h3>
+            <p>
+              Total Funding: $45K<br />Pending: $15K (2 offers)<br />Investors
+              Connected: 5<br /><progress value="60" max="100">60%</progress> to
+              $75K goal
+            </p>
+          </div>
+          <div class="stat-card">
+            <h3>Recent Activity</h3>
+            <p>
+              Mar 20, 2025: Investor ‘GreenFuture’ sent a $10K proposal.<br />Mar
+              18, 2025: Updated farm profile.<br /><a href="#"
+                >See All Activity</a
+              >
+            </p>
+          </div>
+        </section>
+        <section class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="action-buttons">
+            <button>Update Farm Profile</button>
+            <button>Post Funding Request</button>
+            <button>Check Messages</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Find Investors Page -->
+      <main id="find-investors" class="content">
+        <section class="search-section">
+          <h2>Search Investors</h2>
+          <input
+            type="text"
+            placeholder="Search by name, location, or interest (e.g., organic farming)"
+          />
+          <div class="filter-group">
+            <select>
+              <option>Investment Range</option>
+              <option>$1K-$10K</option>
+              <option>$10K-$50K</option>
+              <option>$50K+</option>
+            </select>
+            <select>
+              <option>Location</option>
+              <option>All</option>
+              <option>North America</option>
+              <option>Europe</option>
+              <option>Asia</option>
+            </select>
+            <div>
+              <label><input type="checkbox" /> Sustainable Farming</label>
+              <label><input type="checkbox" /> Livestock</label>
+              <label><input type="checkbox" /> Tech Innovation</label>
+            </div>
+            <button>Apply Filters</button>
+          </div>
+        </section>
+        <section class="investors-list">
+          <h2>Available Investors</h2>
+          <div class="list-container">
+            <div class="investor-item">
+              <strong>John Doe Ventures</strong><br />
+              Investment Range: $20K - $50K<br />
+              Interests: Organic Crops, Irrigation Tech<br />
+              Location: Kigali, Rwanda<br />
+              <button>Connect</button>
+            </div>
+            <div class="investor-item">
+              <strong>GreenFuture Fund</strong><br />
+              Investment Range: $10K - $100K<br />
+              Interests: Livestock, Sustainable Practices<br />
+              Location: Toronto, Canada<br />
+              <button>Connect</button>
+            </div>
+          </div>
+          <div class="pagination">
+            Page 1 of 3 <button>Prev</button> <button>Next</button>
+          </div>
+        </section>
+        <section class="action-section">
+          <div>
+            <h2>Actions</h2>
+            <p>
+              Select an investor from the list to contact them directly or save
+              your search criteria for later.
+            </p>
+          </div>
+          <div class="action-buttons">
+            <button>Contact Selected</button>
+            <button>Save Search</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Notifications Page -->
+      <main id="notifications" class="content">
+        <section class="notifications-header">
+          <h2>Notifications</h2>
+          <div class="filter-group">
+            <input type="text" placeholder="Search notifications" />
+          </div>
+        </section>
+        <section class="notifications-list">
+          <h2>Recent Notifications</h2>
+          <div class="list-container">
+            <p class="unread">
+              <span class="dot">•</span> Mar 23, 2025, 10:30 AM: Investor ‘John
+              Doe Ventures’ viewed your profile.
+            </p>
+            <p class="unread">
+              <span class="dot">•</span> Mar 22, 2025, 3:15 PM: Funding offer of
+              $10K received from ‘GreenFuture Fund’.
+            </p>
+            <p>Mar 20, 2025, 9:00 AM: System: Your farm report is ready.</p>
+            <p>
+              Mar 19, 2025, 11:45 AM: Investor ‘AgriCapital’ sent a message.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <!-- New Seeds Opt-In Page -->
+      <main id="new-seeds" class="content">
+        <section class="seeds-list">
+          <h2>Available Seed Options</h2>
+          <div class="sort-group">
+            <label>Sort by: </label>
+            <select>
+              <option>Yield</option>
+              <option>Investor Appeal</option>
+              <option>Name</option>
+            </select>
+          </div>
+          <div class="list-container">
+            <div class="seed-item">
+              <strong>DroughtGuard Corn</strong><br />
+              Expected Yield: +15% vs. standard<br />
+              Conditions: Dry climates, low water<br />
+              Investor Appeal: High (sustainability focus)<br />
+              <label><input type="checkbox" /> Opt-In</label>
+            </div>
+            <div class="seed-item">
+              <strong>FastGrow Soybeans</strong><br />
+              Expected Yield: +10% vs. standard<br />
+              Conditions: Temperate, fertile soil<br />
+              Investor Appeal: Moderate<br />
+              <label><input type="checkbox" /> Opt-In</label>
+            </div>
+          </div>
+        </section>
+        <section class="opt-in-section">
+          <div>
+            <h2>Opt-In Actions</h2>
+            <p>
+              Select your seeds above, then confirm to receive them in your next
+              shipment. You can save your choices without committing.
+            </p>
+          </div>
+          <div class="action-buttons">
+            <button>Save Selection</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2025 RootCap Investment. All rights reserved.</p>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9256c11d3d84507e',t:'MTc0MjgyNTQ1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
