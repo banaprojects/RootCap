@@ -52,7 +52,7 @@ body {
 
 /* Hamburger Menu */
 .menu-toggle {
-  display: none; /* Hidden by default on desktop */
+  display: none;
   background: none;
   border: none;
   cursor: pointer;
@@ -149,7 +149,7 @@ body {
 
 .dropdown a {
   display: block;
-  color: #444;
+  color: #fff; /* Changed to white for better contrast */
   padding: 10px 15px;
   text-decoration: none;
   font-size: 0.9rem;
@@ -157,7 +157,14 @@ body {
 }
 
 .dropdown a:hover {
-  background: #e9f5ee;
+  background: rgba(255, 255, 255, 0.25); /* Adjusted hover effect */
+}
+
+/* Restore hover effect for desktop */
+@media (min-width: 769px) {
+  .nav-links li:hover .dropdown {
+    display: block;
+  }
 }
 
 /* View As Button */
@@ -266,15 +273,33 @@ body {
   flex: 4;
 }
 
-/* New Seeds Styles */
-.seeds-list {
+/* E-Learning Styles */
+.e-learning-list {
   background: #fff;
   padding: 25px;
   border-radius: 12px;
   flex: 3;
 }
 
-.opt-in-section {
+.learning-action-section {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Marketplace Styles */
+.marketplace-list {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  flex: 3;
+}
+
+.marketplace-action-section {
   background: #fff;
   padding: 25px;
   border-radius: 12px;
@@ -386,18 +411,21 @@ p {
 }
 
 .investor-item,
-.seed-item {
+.learning-item,
+.marketplace-item {
   border-bottom: 1px solid #eee;
   padding: 15px;
 }
 
 .investor-item:last-child,
-.seed-item:last-child {
+.learning-item:last-child,
+.marketplace-item:last-child {
   border-bottom: none;
 }
 
 .investor-item button,
-.seed-item button {
+.learning-item button,
+.marketplace-item button {
   margin-top: 10px;
   padding: 8px 15px;
   background: #27ae60;
@@ -483,22 +511,22 @@ p {
   }
 
   .menu-toggle {
-    display: block; /* Show hamburger on mobile */
+    display: block;
   }
 
   .sidebar {
     position: fixed;
-    top: 70px; /* Below navbar */
+    top: 70px;
     left: 0;
     width: 250px;
     height: calc(100vh - 70px);
     background: linear-gradient(135deg, #27ae60, #089244);
-    transform: translateX(-100%); /* Hidden by default */
+    transform: translateX(-100%);
     z-index: 999;
   }
 
   .sidebar.active {
-    transform: translateX(0); /* Show when active */
+    transform: translateX(0);
   }
 
   .nav-links {
@@ -524,7 +552,7 @@ p {
     position: static;
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
-    display: none; /* Hidden by default, toggled by JS */
+    display: none;
   }
 
   .nav-links li:hover .dropdown {
@@ -532,7 +560,7 @@ p {
   }
 
   .dropdown.active {
-    display: block; /* Show when toggled */
+    display: block;
   }
 
   .content.active {
@@ -548,8 +576,10 @@ p {
   .action-section,
   .notifications-header,
   .notifications-list,
-  .seeds-list,
-  .opt-in-section {
+  .e-learning-list,
+  .learning-action-section,
+  .marketplace-list,
+  .marketplace-action-section {
     flex: none;
   }
 }

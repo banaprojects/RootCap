@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const sidebar = document.querySelector(".sidebar");
 
-  // Check if elements are found
   if (!menuToggle || !sidebar) {
     console.error("Menu toggle or sidebar not found!");
   } else {
@@ -20,13 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("View As Investor button found.");
   }
 
-  // Toggle sidebar on hamburger click
   menuToggle.addEventListener("click", () => {
     menuToggle.classList.toggle("active");
     sidebar.classList.toggle("active");
   });
 
-  // Function to show a specific page
   function showPage(pageId) {
     const currentPage = document.querySelector(".content.active");
     if (currentPage) {
@@ -44,21 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const activeLink = document.querySelector(`[data-page="${pageId}"]`);
     if (activeLink) activeLink.classList.add("active");
 
-    // Close sidebar on mobile after page selection
     if (window.innerWidth <= 768) {
       sidebar.classList.remove("active");
       menuToggle.classList.remove("active");
     }
   }
 
-  // Handle navigation link clicks
   navLinks.forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const pageId = link.getAttribute("data-page");
 
       if (pageId === "account" && window.innerWidth <= 768) {
-        // Toggle dropdown on mobile for "Account"
         const dropdown = link.nextElementSibling;
         dropdown.classList.toggle("active");
       } else if (pageId !== "account" && !link.classList.contains("active")) {
@@ -66,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Add hover transitions (desktop only)
     link.addEventListener("mouseover", () => {
       if (window.innerWidth > 768) {
         link.style.transition = "all 0.3s ease";
@@ -79,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Handle dropdown menu actions
   dropdownLinks.forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -101,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           break;
       }
-      // Close sidebar and dropdown on mobile after action
       if (window.innerWidth <= 768) {
         sidebar.classList.remove("active");
         menuToggle.classList.remove("active");
@@ -111,7 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Handle "View As Investor" button
   if (viewAsInvestorBtn) {
     viewAsInvestorBtn.addEventListener("click", () => {
       console.log("View As Investor button clicked.");
@@ -119,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Redirecting to investor.html");
         window.location.href = "../investor-side/index.html";
       }
-      // Close sidebar on mobile
       if (window.innerWidth <= 768) {
         sidebar.classList.remove("active");
         menuToggle.classList.remove("active");
@@ -127,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Handle action buttons
   actionButtons.forEach(button => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
@@ -151,19 +139,27 @@ document.addEventListener("DOMContentLoaded", () => {
         case "Apply Filters":
           alert("Applying filters - Showing matching investors.");
           break;
-        case "Mark All Read":
-          alert("All notifications marked as read.");
+        case "Save Favorites":
+          alert("Favorites saved - Modules added to your list.");
           break;
-        case "Clear All":
-          if (confirm("Clear all notifications?")) {
-            alert("Notifications cleared.");
-          }
+        case "Track Progress":
+          alert("Progress tracked - View your learning stats.");
           break;
-        case "Confirm Opt-In":
-          alert("Opt-in confirmed - Seeds added to next shipment.");
+        case "Continue":
+        case "Start":
+          alert(`${buttonText}ing module - Loading content...`);
           break;
-        case "Save Selection":
-          alert("Selection saved - Seeds preserved for review.");
+        case "Buy":
+          alert("Adding to cart - Proceeding to purchase...");
+          break;
+        case "Rent":
+          alert("Adding to cart - Setting up rental agreement...");
+          break;
+        case "Add to Cart":
+          alert("Items added to cart - Ready to checkout.");
+          break;
+        case "Save to Wishlist":
+          alert("Items saved to wishlist - View anytime.");
           break;
         default:
           alert(`Action: ${buttonText} - Functionality not implemented.`);
@@ -171,14 +167,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Initialize the dashboard as the default page
   const initialPage = document.getElementById("dashboard");
   initialPage.classList.add("active");
   setTimeout(() => {
     initialPage.style.opacity = "1";
   }, 0);
 
-  // Inject dynamic styles for content transitions
   const styleSheet = document.createElement("style");
   styleSheet.textContent = `
     .content {
